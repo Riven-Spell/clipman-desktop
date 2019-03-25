@@ -27,7 +27,7 @@ func SaveCFG() {
 	}
 }
 
-func LoadCFG() {
+func LoadCFG() bool {
 	if fi, err := os.Stat(CfgLocation); err == nil {
 		buffer := make([]byte, fi.Size())
 		if f, err := os.Open(CfgLocation); err == nil {
@@ -39,7 +39,7 @@ func LoadCFG() {
 					Buffer = config.Buffer
 					Bind = config.Bind
 					ServerIP = config.ServerIP
-					return
+					return true
 				}
 			}
 		}
@@ -56,4 +56,5 @@ func LoadCFG() {
 	UserHash = hex.EncodeToString(hash.Sum(nil))
 
 	SaveCFG()
+	return false
 }

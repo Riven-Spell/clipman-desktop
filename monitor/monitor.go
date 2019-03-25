@@ -6,7 +6,7 @@ import (
 	"time"
 )
 
-var clipboardContent string
+var ClipboardContent string
 
 func StartMonitor() {
 	ticker := time.NewTicker(time.Second / 2)
@@ -15,8 +15,8 @@ func StartMonitor() {
 		<- ticker.C
 
 		if data, err := clipboard.ReadAll(); err == nil {
-			if clipboardContent != data {
-				clipboardContent = data
+			if ClipboardContent != data {
+				ClipboardContent = data
 
 				//TODO: ping the web client.
 			}

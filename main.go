@@ -2,6 +2,8 @@ package main
 
 import (
 	"fmt"
+	"github.com/virepri/clipman-desktop/client"
+	"github.com/virepri/clipman-desktop/client/internal-command"
 	"github.com/virepri/clipman-desktop/config"
 	"github.com/virepri/clipman-desktop/monitor"
 	"os/user"
@@ -16,10 +18,19 @@ func main() {
 		return
 	}
 
-	config.LoadCFG()
-	config.WaitGroup.Add(1)
+	if config.LoadCFG() {
+		client.Messages <- internal_command.Command{
+			Cmd: internal_command.CONNECT,
+		}
+
+		client.Messages <- internal_command.Command{
+			Cmd: internal_command.AUTH_USER,
+		}
+	}
+	config.WaitGroup.Add(2)
 
 	go monitor.StartMonitor()
+	go client.StartClient()
 
 	config.WaitGroup.Wait()
 }
