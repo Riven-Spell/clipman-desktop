@@ -21,3 +21,18 @@ func Connect(args []string) {
 		}
 	}
 }
+
+func Disconnect(args []string) {
+	if config.Connection != nil {
+		if err := config.Connection.Close(); err == nil {
+			if args[0] == "cli_request" {
+				commands.Success <- true
+			}
+			return
+		}
+	}
+
+	if args[0] == "cli_request" {
+		commands.Success <- false
+	}
+}

@@ -3,11 +3,13 @@ package commands
 type Command func(args []string)
 
 var Aliases = map[string]Command{
-	"help": help,
-	"auth": auth,
-	"clip": clip,
-	"exit": exit,
-	"config": configCmd,
+	"help":       help,
+	"auth":       auth,
+	"clip":       clip,
+	"exit":       exit,
+	"config":     configCmd,
+	"connect":    connect,
+	"disconnect": disconnect,
 }
 
 var HelpList = map[string]string{
@@ -43,4 +45,6 @@ Forcefully checks the clipboard for an update.
 clip empty:
 Empties the clipboard.`,
 	"exit": `Shuts down the server.`,
+	"connect": `Connects you to the server.`,
+	"disconnect": `Disconnects you from the server.`,
 }

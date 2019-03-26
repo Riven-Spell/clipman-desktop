@@ -9,6 +9,7 @@ type CommandID uint8
 
 const (
 	CONNECT CommandID = iota //resets the connection.
+	DISCONNECT
 
 	AUTH_USER //Requires an active connection.
 	AUTH_ADMIN
@@ -21,6 +22,7 @@ const (
 
 var Commands = map[CommandID]func([]string){
 	CONNECT: Connect,
+	DISCONNECT: Disconnect,
 	AUTH_USER: AuthUser,
 	AUTH_ADMIN: AuthAdmin,
 	PUSH_CLIP: PushClip,
