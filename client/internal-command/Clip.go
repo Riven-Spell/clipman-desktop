@@ -13,8 +13,11 @@ func PushClip(args []string) {
 
 	if config.Connection != nil && commands.UserPerms {
 		_, _ = config.Connection.Write(buffer)
-		commands.Success <- true
-	} else {
+
+		if args[0] == "cli_request" {
+			commands.Success <- true
+		}
+	} else if args[0] == "cli_request" {
 		commands.Success <- false
 	}
 }
@@ -24,8 +27,11 @@ func RefreshClip(args []string) {
 
 	if config.Connection != nil && commands.UserPerms {
 		_, _ = config.Connection.Write(buffer)
-		commands.Success <- true
-	} else {
+
+		if args[0] == "cli_request" {
+			commands.Success <- true
+		}
+	} else if args[0] == "cli_request" {
 		commands.Success <- false
 	}
 }
