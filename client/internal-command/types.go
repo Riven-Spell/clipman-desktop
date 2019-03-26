@@ -1,7 +1,7 @@
 package internal_command
 
 type Command struct {
-	Cmd CommandID
+	Cmd    CommandID
 	Params []string
 }
 

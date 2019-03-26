@@ -3,7 +3,7 @@ package arguments
 import "os"
 
 func CheckArgs() {
-	for _,v := range os.Args {
+	for _, v := range os.Args {
 		switch v {
 		case "--admin":
 			AutoAdmin = true

@@ -36,7 +36,7 @@ func main() {
 
 				if arguments.AutoAdmin {
 					client.Messages <- internal_command.Command{
-						Cmd:internal_command.AUTH_ADMIN,
+						Cmd: internal_command.AUTH_ADMIN,
 					}
 				}
 			}

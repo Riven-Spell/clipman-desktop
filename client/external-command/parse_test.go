@@ -93,4 +93,3 @@ func TestParseCmdUnexpectedArg(t *testing.T) {
 		t.Fail()
 	}
 }
-

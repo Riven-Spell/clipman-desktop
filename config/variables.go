@@ -7,16 +7,16 @@ var WaitGroup sync.WaitGroup
 //Config variables below
 var (
 	AdminHash string
-	UserHash string
-	ServerIP string
-	Bind string
-	Buffer int
+	UserHash  string
+	ServerIP  string
+	Bind      string
+	Buffer    int
 )
 
 type cfg struct {
 	AdminHash string
-	UserHash string
-	ServerIP string
-	Bind string
-	Buffer int
+	UserHash  string
+	ServerIP  string
+	Bind      string
+	Buffer    int
 }

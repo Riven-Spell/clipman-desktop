@@ -16,22 +16,22 @@ func clip(args []string) {
 				switch args[1] {
 				case "push":
 					client.Messages <- internal_command.Command{
-						Cmd:internal_command.PUSH_CLIP,
+						Cmd:    internal_command.PUSH_CLIP,
 						Params: []string{"cli_request"},
 					}
 
-					if <- Success {
+					if <-Success {
 						fmt.Println("Successfully pushed the clipboard!")
 					} else {
 						fmt.Println("Couldn't push the clipboard. Are you connected or authorized?")
 					}
 				case "refresh":
 					client.Messages <- internal_command.Command{
-						Cmd:internal_command.REFRESH_CLIP,
+						Cmd:    internal_command.REFRESH_CLIP,
 						Params: []string{"cli_request"},
 					}
 
-					if <- Success {
+					if <-Success {
 						fmt.Println("Successfully refreshed the clipboard!")
 					} else {
 						fmt.Println("Couldn't refresh the clipboard. Are you connected or authorized?")
@@ -44,11 +44,11 @@ func clip(args []string) {
 					monitor.ClipboardContent = data
 
 					client.Messages <- internal_command.Command{
-						Cmd:internal_command.PUSH_CLIP,
+						Cmd:    internal_command.PUSH_CLIP,
 						Params: []string{"cli_request"},
 					}
 
-					if <- Success {
+					if <-Success {
 						fmt.Println("Clipboard was out of date! Pushed clipboard to server.")
 					} else {
 						fmt.Println("Clipboard was out of date. Failed to push to the server.")

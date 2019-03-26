@@ -11,10 +11,10 @@ import (
 func SaveCFG() {
 	config := cfg{
 		AdminHash: AdminHash,
-		UserHash: UserHash,
-		Bind: Bind,
-		ServerIP: ServerIP,
-		Buffer: Buffer,
+		UserHash:  UserHash,
+		Bind:      Bind,
+		ServerIP:  ServerIP,
+		Buffer:    Buffer,
 	}
 
 	data, _ := json.Marshal(config)

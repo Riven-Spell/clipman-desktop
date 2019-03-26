@@ -15,9 +15,9 @@ func StartClient() {
 
 	for {
 		select {
-		case cmd := <- Messages:
+		case cmd := <-Messages:
 			fmt.Println(cmd)
-		case cmd := <- ExternalMessages:
+		case cmd := <-ExternalMessages:
 			fmt.Println(cmd)
 		}
 	}

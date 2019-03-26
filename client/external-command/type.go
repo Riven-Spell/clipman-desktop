@@ -7,9 +7,7 @@ type Command struct {
 	Args []string
 }
 
-var Aliases = map[byte]func(Device *shared.Device, Args []string){
-
-} //Pointers because some commands can elevate privileges.
+var Aliases = map[byte]func(Device *shared.Device, Args []string){} //Pointers because some commands can elevate privileges.
 //For now, clients will have just one command available to the server: 0 updateClip
 
 /*

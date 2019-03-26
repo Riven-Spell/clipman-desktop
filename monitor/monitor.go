@@ -15,15 +15,15 @@ func StartMonitor() {
 	ticker := time.NewTicker(time.Second / 10)
 	defer config.WaitGroup.Done()
 
-	for  {
-		<- ticker.C
+	for {
+		<-ticker.C
 
 		if data, err := clipboard.ReadAll(); err == nil {
 			if ClipboardContent != data {
 				ClipboardContent = data
 
 				client.Messages <- internal_command.Command{
-					Cmd:internal_command.PUSH_CLIP,
+					Cmd: internal_command.PUSH_CLIP,
 				}
 			}
 		} else {
