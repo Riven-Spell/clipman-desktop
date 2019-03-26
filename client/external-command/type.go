@@ -1,13 +1,15 @@
 package external_command
 
-import "github.com/virepri/clipman-server/shared"
-
 type Command struct {
 	Cmd  byte
 	Args []string
 }
 
-var Aliases = map[byte]func(Device *shared.Device, Args []string){} //Pointers because some commands can elevate privileges.
+var Aliases = map[byte]func(args []string){
+	0: SetClip,
+	1: Success,
+	2: Failure,
+} //Pointers because some commands can elevate privileges.
 //For now, clients will have just one command available to the server: 0 updateClip
 
 /*
