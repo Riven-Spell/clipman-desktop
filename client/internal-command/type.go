@@ -18,3 +18,12 @@ const (
 
 	RCON_COMMAND
 )
+
+var Commands = map[CommandID]func([]string){
+	CONNECT: Connect,
+	AUTH_USER: AuthUser,
+	AUTH_ADMIN: AuthAdmin,
+	PUSH_CLIP: PushClip,
+	REFRESH_CLIP: RefreshClip,
+	RCON_COMMAND: Rcon,
+}
