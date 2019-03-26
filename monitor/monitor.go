@@ -9,8 +9,6 @@ import (
 	"time"
 )
 
-var ClipboardContent string
-
 func StartMonitor() {
 	ticker := time.NewTicker(time.Second / 10)
 	defer config.WaitGroup.Done()
@@ -19,8 +17,8 @@ func StartMonitor() {
 		<-ticker.C
 
 		if data, err := clipboard.ReadAll(); err == nil {
-			if ClipboardContent != data {
-				ClipboardContent = data
+			if config.ClipboardContent != data {
+				config.ClipboardContent = data
 
 				client.Messages <- internal_command.Command{
 					Cmd: internal_command.PUSH_CLIP,

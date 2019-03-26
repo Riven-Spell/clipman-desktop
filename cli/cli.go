@@ -41,5 +41,5 @@ func readLine() string {
 }
 
 func SetupChannels() {
-	commands.Success = make(chan bool, 1)
+	config.CLISuccess = make(chan bool)
 }

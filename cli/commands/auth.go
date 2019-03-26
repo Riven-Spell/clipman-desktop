@@ -9,10 +9,6 @@ import (
 	"github.com/virepri/clipman-desktop/config"
 )
 
-var Success chan bool
-var AdminPerms = false
-var UserPerms = false
-
 func auth(args []string) {
 	if len(args) >= 1 {
 		switch args[0] {
@@ -22,12 +18,12 @@ func auth(args []string) {
 				Params: []string{"cli_request"},
 			}
 
-			if <-Success {
+			if <-config.CLISuccess {
 				fmt.Println("Successfully authenticated as a user.")
-				UserPerms = true
+				config.UserPerms = true
 			} else {
 				fmt.Println("Failed to authenticate, maybe your password is incorrect?")
-				UserPerms = false
+				config.UserPerms = false
 			}
 		case "admin":
 			client.Messages <- internal_command.Command{
@@ -35,12 +31,12 @@ func auth(args []string) {
 				Params: []string{"cli_request"},
 			}
 
-			if <-Success {
+			if <-config.CLISuccess {
 				fmt.Println("Successfully authenticated as an admin.")
-				AdminPerms = true
+				config.AdminPerms = true
 			} else {
 				fmt.Println("Failed to authenticate, maybe your password is incorrect?")
-				AdminPerms = false
+				config.AdminPerms = false
 			}
 		case "pass":
 			if len(args) >= 3 {
@@ -57,7 +53,7 @@ func auth(args []string) {
 			}
 		case "check":
 			fmt.Println("User  | Admin")
-			fmt.Println(UserPerms, "|", AdminPerms)
+			fmt.Println(config.UserPerms, "|", config.AdminPerms)
 		}
 	}
 }

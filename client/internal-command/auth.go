@@ -2,7 +2,6 @@ package internal_command
 
 import (
 	"fmt"
-	"github.com/virepri/clipman-desktop/cli/commands"
 	"github.com/virepri/clipman-desktop/config"
 )
 
@@ -18,7 +17,7 @@ func AuthUser(args []string) {
 
 		//TODO: handle success/failure conditions
 	} else if args[0] == "cli_request" {
-		commands.Success <- false
+		config.CLISuccess <- false
 	}
 }
 
@@ -34,6 +33,6 @@ func AuthAdmin(args []string) {
 
 		//TODO: handle success/failure conditions.
 	} else if args[0] == "cli_request" {
-		commands.Success <- false
+		config.CLISuccess <- false
 	}
 }

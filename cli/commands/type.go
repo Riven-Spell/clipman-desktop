@@ -44,7 +44,7 @@ Forcefully checks the clipboard for an update.
 
 clip empty:
 Empties the clipboard.`,
-	"exit": `Shuts down the server.`,
-	"connect": `Connects you to the server.`,
+	"exit":       `Shuts down the server.`,
+	"connect":    `Connects you to the server.`,
 	"disconnect": `Disconnects you from the server.`,
 }

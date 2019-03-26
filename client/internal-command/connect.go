@@ -2,7 +2,6 @@ package internal_command
 
 import (
 	"fmt"
-	"github.com/virepri/clipman-desktop/cli/commands"
 	"github.com/virepri/clipman-desktop/config"
 	"net"
 )
@@ -12,12 +11,12 @@ func Connect(args []string) {
 		config.Connection = c
 
 		if args[0] == "cli_request" {
-			commands.Success <- true
+			config.CLISuccess <- true
 		}
 	} else {
 		fmt.Println(err.Error())
 		if args[0] == "cli_request" {
-			commands.Success <- false
+			config.CLISuccess <- false
 		}
 	}
 }
@@ -25,14 +24,17 @@ func Connect(args []string) {
 func Disconnect(args []string) {
 	if config.Connection != nil {
 		if err := config.Connection.Close(); err == nil {
+			config.AdminPerms = false
+			config.UserPerms = false
+
 			if args[0] == "cli_request" {
-				commands.Success <- true
+				config.CLISuccess <- true
 			}
 			return
 		}
 	}
 
 	if args[0] == "cli_request" {
-		commands.Success <- false
+		config.CLISuccess <- false
 	}
 }

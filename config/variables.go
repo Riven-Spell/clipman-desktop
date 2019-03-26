@@ -7,6 +7,10 @@ import (
 
 var WaitGroup sync.WaitGroup
 var Connection net.Conn
+var ClipboardContent string
+var CLISuccess chan bool
+var UserPerms bool
+var AdminPerms bool
 
 //Config variables below
 var (
