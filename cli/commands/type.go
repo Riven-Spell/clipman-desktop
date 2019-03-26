@@ -6,6 +6,7 @@ var Aliases = map[string]Command{
 	"help": help,
 	"auth": auth,
 	"clip": clip,
+	"exit": exit,
 }
 
 var HelpList = map[string]string{
@@ -34,4 +35,5 @@ Forcefully checks the clipboard for an update.
 
 clip empty:
 Empties the clipboard.`,
+	"exit": `Shuts down the server.`,
 }
