@@ -1,8 +1,12 @@
 package config
 
-import "sync"
+import (
+	"net"
+	"sync"
+)
 
 var WaitGroup sync.WaitGroup
+var Connection net.Conn
 
 //Config variables below
 var (
