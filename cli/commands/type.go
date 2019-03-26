@@ -4,6 +4,7 @@ type Command func(args []string)
 
 var Aliases = map[string]Command{
 	"help":help,
+	"auth":auth,
 }
 
 var HelpList = map[string]string{
@@ -25,6 +26,7 @@ Sets the buffer size.`,
 Forcefully pushes or refreshes the clipboard to/from the server.
 
 clip recheck:
+Forcefully checks the clipboard for an update.
 
 clip empty:
 Empties the clipboard.`,

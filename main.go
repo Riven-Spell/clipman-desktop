@@ -14,6 +14,7 @@ import (
 func main() {
 	arguments.CheckArgs()
 	client.SetupChannels()
+	cli.SetupChannels()
 
 	if u, err := user.Current(); err == nil {
 		config.CfgLocation = u.HomeDir + "/.config/clipman-desktop.cfg"

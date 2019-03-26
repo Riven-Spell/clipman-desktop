@@ -3,8 +3,8 @@ package cli
 import (
 	"bufio"
 	"fmt"
+	"github.com/virepri/clipman-desktop/cli/commands"
 	"github.com/virepri/clipman-desktop/config"
-	"github.com/virepri/clipman-server/cli/commands"
 	"os"
 	"strings"
 )
@@ -38,4 +38,8 @@ func readLine() string {
 		fmt.Println(err.Error())
 		return ""
 	}
+}
+
+func SetupChannels() {
+	commands.Success = make(chan bool, 1)
 }
