@@ -12,7 +12,6 @@ func SaveCFG() {
 	config := cfg{
 		AdminHash: AdminHash,
 		UserHash:  UserHash,
-		Bind:      Bind,
 		ServerIP:  ServerIP,
 		Buffer:    Buffer,
 	}
@@ -37,7 +36,6 @@ func LoadCFG() bool {
 					AdminHash = config.AdminHash
 					UserHash = config.UserHash
 					Buffer = config.Buffer
-					Bind = config.Bind
 					ServerIP = config.ServerIP
 					return true
 				}
@@ -47,8 +45,8 @@ func LoadCFG() bool {
 
 	fmt.Println("Config doesn't seem to exist, generating a config.")
 
-	ServerIP = "127.0.0.1"
-	Bind = ":7606"
+	ServerIP = "127.0.0.1:7606"
+	Buffer = 1024
 
 	hash := sha256.New()
 	hash.Write([]byte("password"))

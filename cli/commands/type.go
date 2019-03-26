@@ -7,6 +7,7 @@ var Aliases = map[string]Command{
 	"auth": auth,
 	"clip": clip,
 	"exit": exit,
+	"config": configCmd,
 }
 
 var HelpList = map[string]string{
@@ -26,7 +27,13 @@ Checks what the client is currently authorized for.`,
 Sets the server IP and port.
 
 config buffer [size]:
-Sets the buffer size.`,
+Sets the buffer size.
+
+config save:
+Saves the config.
+
+config reload:
+Reloads the config from the file. Does not disconnect or de-auth.`,
 	"clip": `clip force [push/refresh]:
 Forcefully pushes or refreshes the clipboard to/from the server.
 

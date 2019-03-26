@@ -9,7 +9,6 @@ var (
 	AdminHash string
 	UserHash  string
 	ServerIP  string
-	Bind      string
 	Buffer    int
 )
 
@@ -17,6 +16,5 @@ type cfg struct {
 	AdminHash string
 	UserHash  string
 	ServerIP  string
-	Bind      string
 	Buffer    int
 }
