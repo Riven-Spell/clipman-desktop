@@ -2,12 +2,16 @@ package client
 
 import (
 	"fmt"
-	"net"
+	"github.com/virepri/clipman-desktop/client/external-command"
+	"github.com/virepri/clipman-desktop/client/internal-command"
+	"github.com/virepri/clipman-desktop/config"
 )
 
 func StartClient() {
-	var connection net.Conn
-	fmt.Println(connection) //TODO: handle connection stuff.
+	defer config.WaitGroup.Done()
+
+	//var connection net.Conn
+	//fmt.Println(connection) //TODO: handle connection stuff.
 
 	for {
 		select {
@@ -17,4 +21,9 @@ func StartClient() {
 			fmt.Println(cmd)
 		}
 	}
+}
+
+func SetupChannels() {
+	Messages = make(chan internal_command.Command)
+	ExternalMessages = make(chan external_command.Command)
 }

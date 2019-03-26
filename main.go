@@ -2,6 +2,8 @@ package main
 
 import (
 	"fmt"
+	"github.com/virepri/clipman-desktop/arguments"
+	"github.com/virepri/clipman-desktop/cli"
 	"github.com/virepri/clipman-desktop/client"
 	"github.com/virepri/clipman-desktop/client/internal-command"
 	"github.com/virepri/clipman-desktop/config"
@@ -10,27 +12,40 @@ import (
 )
 
 func main() {
+	arguments.CheckArgs()
+	client.SetupChannels()
+
 	if u, err := user.Current(); err == nil {
 		config.CfgLocation = u.HomeDir + "/.config/clipman-desktop.cfg"
-		fmt.Println(u.HomeDir)
 	} else {
 		fmt.Println(err.Error())
 		return
 	}
 
 	if config.LoadCFG() {
-		client.Messages <- internal_command.Command{
-			Cmd: internal_command.CONNECT,
-		}
+		if arguments.AutoConnect {
+			client.Messages <- internal_command.Command{
+				Cmd: internal_command.CONNECT,
+			}
 
-		client.Messages <- internal_command.Command{
-			Cmd: internal_command.AUTH_USER,
+			if arguments.AutoAuth {
+				client.Messages <- internal_command.Command{
+					Cmd: internal_command.AUTH_USER,
+				}
+
+				if arguments.AutoAdmin {
+					client.Messages <- internal_command.Command{
+						Cmd:internal_command.AUTH_ADMIN,
+					}
+				}
+			}
 		}
 	}
-	config.WaitGroup.Add(2)
+	config.WaitGroup.Add(3)
 
 	go monitor.StartMonitor()
 	go client.StartClient()
+	go cli.StartCLI()
 
 	config.WaitGroup.Wait()
 }
