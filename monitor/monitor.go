@@ -25,7 +25,7 @@ func StartMonitor() {
 				}
 			}
 		} else {
-			fmt.Println(err.Error())
+			fmt.Println("monitor: " + err.Error())
 		}
 	}
 }

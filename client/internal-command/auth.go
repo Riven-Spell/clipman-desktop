@@ -14,8 +14,6 @@ func AuthUser(args []string) {
 		if _, err := config.Connection.Write(buffer); err != nil {
 			fmt.Println(err)
 		}
-
-		//TODO: handle success/failure conditions
 	} else if args[0] == "cli_request" {
 		config.CLISuccess <- false
 	}
@@ -30,8 +28,6 @@ func AuthAdmin(args []string) {
 		if _, err := config.Connection.Write(buffer); err != nil {
 			fmt.Println(err)
 		}
-
-		//TODO: handle success/failure conditions.
 	} else if args[0] == "cli_request" {
 		config.CLISuccess <- false
 	}
