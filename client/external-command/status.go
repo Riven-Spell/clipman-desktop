@@ -1,11 +1,13 @@
 package external_command
 
-func Success(args []string) {
+import "github.com/virepri/clipman-desktop/config"
 
+func Success(args []string) {
+	config.CLISuccess <- true
 }
 
 func Failure(args []string) {
-
+	config.CLISuccess <- false
 }
 
-//TODO: figure out how to handle these.
+//It's not like these are going to be used any other ways.
