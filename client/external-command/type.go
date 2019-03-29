@@ -1,11 +1,11 @@
 package external_command
 
 type Command struct {
-	Cmd  byte
-	Args []string
+	Cmd    byte
+	Params []string
 }
 
-var Aliases = map[byte]func(args []string){
+var Commands = map[byte]func(args []string){
 	0: SetClip,
 	1: Success,
 	2: Failure,
@@ -33,7 +33,7 @@ Client commands:
 2 failure
 */
 func ParseCmd(buffer []byte) Command {
-	cmd := Command{Cmd: buffer[0], Args: make([]string, 0)}
+	cmd := Command{Cmd: buffer[0], Params: make([]string, 0)}
 
 	start := -1
 	k := -1
@@ -41,14 +41,14 @@ func ParseCmd(buffer []byte) Command {
 	for k, v = range buffer {
 		if k != 0 && v == 0 {
 			if start != -1 {
-				cmd.Args = append(cmd.Args, string(buffer[start:k]))
+				cmd.Params = append(cmd.Params, string(buffer[start:k]))
 			}
 			break
 		}
 
 		if k != 0 && v == 10 { //LF ASCII
 			if start != -1 {
-				cmd.Args = append(cmd.Args, string(buffer[start:k]))
+				cmd.Params = append(cmd.Params, string(buffer[start:k]))
 			}
 			start = k + 1
 		}

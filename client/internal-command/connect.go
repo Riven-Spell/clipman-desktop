@@ -27,6 +27,8 @@ func Disconnect(args []string) {
 			config.AdminPerms = false
 			config.UserPerms = false
 
+			config.Connection = nil
+
 			if args[0] == "cli_request" {
 				config.CLISuccess <- true
 			}

@@ -1,7 +1,6 @@
 package client
 
 import (
-	"fmt"
 	"github.com/virepri/clipman-desktop/client/external-command"
 	"github.com/virepri/clipman-desktop/client/internal-command"
 	"github.com/virepri/clipman-desktop/config"
@@ -10,15 +9,16 @@ import (
 func StartClient() {
 	defer config.WaitGroup.Done()
 
-	//var connection net.Conn
-	//fmt.Println(connection) //TODO: handle connection stuff.
-
 	for {
 		select {
 		case cmd := <-Messages:
-			fmt.Println(cmd)
+			if v, ok := internal_command.Commands[cmd.Cmd]; ok {
+				v(cmd.Params)
+			}
 		case cmd := <-ExternalMessages:
-			fmt.Println(cmd)
+			if v, ok := external_command.Commands[cmd.Cmd]; ok {
+				v(cmd.Params)
+			}
 		}
 	}
 }
