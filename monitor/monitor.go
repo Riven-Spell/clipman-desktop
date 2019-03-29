@@ -17,7 +17,7 @@ func StartMonitor() {
 		<-ticker.C
 
 		if data, err := clipboard.ReadAll(); err == nil {
-			if config.ClipboardContent != data {
+			if !config.LockContent && config.ClipboardContent != data {
 				config.ClipboardContent = data
 
 				client.Messages <- internal_command.Command{

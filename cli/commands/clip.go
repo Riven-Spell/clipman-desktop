@@ -41,6 +41,7 @@ func clip(args []string) {
 		case "recheck":
 			if data, err := clipboard.ReadAll(); err == nil {
 				if config.ClipboardContent != data {
+					config.LockContent = true
 					config.ClipboardContent = data
 
 					client.Messages <- internal_command.Command{
@@ -53,6 +54,7 @@ func clip(args []string) {
 					} else {
 						fmt.Println("Clipboard was out of date. Failed to push to the server.")
 					}
+					config.LockContent = false
 				}
 
 				fmt.Println("Successfully performed clipboard recheck.")
