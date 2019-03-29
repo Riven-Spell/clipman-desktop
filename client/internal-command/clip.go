@@ -5,7 +5,7 @@ import (
 )
 
 func PushClip(args []string) {
-	buffer := []byte{2, 10}
+	buffer := []byte{3, 10}
 	buffer = append(buffer, []byte(config.ClipboardContent)...)
 	buffer = append(buffer, 0)
 

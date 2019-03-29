@@ -10,6 +10,8 @@ func Connect(args []string) {
 	if c, err := net.Dial("tcp", config.ServerIP); err == nil {
 		config.Connection = c
 
+		PushClip(make([]string, 0))
+
 		if len(args) > 0 && args[0] == "cli_request" {
 			config.CLISuccess <- true
 		}
