@@ -16,7 +16,7 @@ func SaveCFG() {
 		Buffer:    Buffer,
 	}
 
-	_ = os.MkdirAll(CfgLocation, 0600) //Who cares
+	_ = os.MkdirAll(CfgDir, 0600) //Who cares
 
 	data, _ := json.Marshal(config)
 	if f, err := os.OpenFile(CfgLocation, os.O_CREATE|os.O_RDWR, 0666); err == nil {

@@ -1,6 +1,9 @@
 package config
 
-var CfgLocation string
+var (
+	CfgLocation string
+	CfgDir      string
+)
 
 const (
 	Version = "1.0"

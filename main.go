@@ -18,6 +18,7 @@ func main() {
 
 	if u, err := user.Current(); err == nil {
 		config.CfgLocation = u.HomeDir + "/.config/clipman-desktop.cfg"
+		config.CfgDir = u.HomeDir + "/.config"
 	} else {
 		fmt.Println(err.Error())
 		return
