@@ -39,6 +39,15 @@ func LoadCFG() bool {
 					UserHash = config.UserHash
 					Buffer = config.Buffer
 					ServerIP = config.ServerIP
+					TLSConfig.InsecureSkipVerify = config.TLSInsecure
+					ServerUsesTLS = config.ServerUsesTLS
+					if TLSConfig.InsecureSkipVerify && ServerUsesTLS {
+						fmt.Println("WARNING: Using TLS without verification of certificate. This is unsafe and prone to MITM attacks.")
+						fmt.Println("Add the server's certificate to your certpool if you trust it (or get the server to switch to a cert authority)")
+					}
+					if !ServerUsesTLS {
+						fmt.Println("WARNING: Do not handle sensitive data without TLS enabled. This is unsafe and prone to MITM attacks.")
+					}
 					return true
 				}
 			}
@@ -54,6 +63,8 @@ func LoadCFG() bool {
 	hash.Write([]byte("password"))
 	AdminHash = hex.EncodeToString(hash.Sum(nil))
 	UserHash = hex.EncodeToString(hash.Sum(nil))
+	TLSConfig.InsecureSkipVerify = false
+	ServerUsesTLS = false
 
 	SaveCFG()
 	return false
