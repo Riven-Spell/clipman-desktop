@@ -6,9 +6,7 @@ import (
 )
 
 func AuthUser(args []string) {
-	buffer := []byte{4, 10}
-	buffer = append(buffer, []byte(config.UserHash)...)
-	buffer = append(buffer, 0)
+	buffer := CmdToBytes(Command{Cmd: AUTH_USER, Params: []string{config.UserHash}})
 
 	if config.Connection != nil {
 		if _, err := config.Connection.Write(buffer); err != nil {

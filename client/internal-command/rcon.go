@@ -4,11 +4,7 @@ import "github.com/virepri/clipman-desktop/config"
 
 func Rcon(args []string) {
 	if config.Connection != nil {
-		buff := []byte{1, 10}
-
-		for _, v := range args {
-			buff = append(buff, append([]byte(v), 10)...)
-		}
+		buff := CmdToBytes(Command{Cmd: RCON_COMMAND, Params: args})
 
 		buff[len(buff)-1] = 0
 

@@ -5,9 +5,7 @@ import (
 )
 
 func PushClip(args []string) {
-	buffer := []byte{3, 10}
-	buffer = append(buffer, []byte(config.ClipboardContent)...)
-	buffer = append(buffer, 0)
+	buffer := CmdToBytes(Command{Cmd: PUSH_CLIP, Params: []string{config.ClipboardContent}})
 
 	if config.Connection != nil && config.UserPerms {
 		_, _ = config.Connection.Write(buffer)
@@ -21,7 +19,7 @@ func PushClip(args []string) {
 }
 
 func RefreshClip(args []string) {
-	buffer := []byte{2, 0}
+	buffer := CmdToBytes(Command{Cmd: REFRESH_CLIP})
 
 	if config.Connection != nil && config.UserPerms {
 		_, _ = config.Connection.Write(buffer)

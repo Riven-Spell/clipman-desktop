@@ -14,9 +14,10 @@ var Commands = map[byte]func(args []string){
 
 /*
 Command structure:
-[CMD, 10, ...., 10, ...., 0]
-Every ASCII LF (\n) character is a new argument.
-Every command ends with a NULL byte.
+[CMD,
+<4 bytes, pushed to 32-bit integer leftwards-- 1, 0, 0, 0 == 1, describes parameter length. Do not include or leave as 0 for no parameters.>,
+<parameter itself-- if smaller than allocated buffer, pad with null>
+<repeat>
 */
 
 /*
@@ -35,24 +36,32 @@ Client commands:
 func ParseCmd(buffer []byte) Command {
 	cmd := Command{Cmd: buffer[0], Params: make([]string, 0)}
 
-	start := -1
-	k := -1
-	var v byte
-	for k, v = range buffer {
-		if k != 0 && v == 0 {
-			if start != -1 {
-				cmd.Params = append(cmd.Params, string(buffer[start:k]))
-			}
+	i := 1
+	for {
+		if len(buffer) < i+4 {
 			break
 		}
 
-		if k != 0 && v == 10 { //LF ASCII
-			if start != -1 {
-				cmd.Params = append(cmd.Params, string(buffer[start:k]))
-			}
-			start = k + 1
+		arglen := bytesToUint32(buffer[i], buffer[i+1], buffer[i+2], buffer[i+3])
+
+		if len(buffer) < i+4+int(arglen) {
+			break
 		}
+
+		cmd.Params = append(cmd.Params, string(buffer[i+4:i+4+int(arglen)]))
+
+		i += int(arglen) + 4
 	}
 
 	return cmd
+}
+
+func bytesToUint32(bytes ...byte) uint32 {
+	var out uint32 = 0
+
+	for k, v := range bytes {
+		out |= uint32(v) << uint(8*k)
+	}
+
+	return out
 }
