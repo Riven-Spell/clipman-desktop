@@ -10,6 +10,7 @@ var WaitGroup sync.WaitGroup
 var Connection net.Conn
 var ClipboardContent string
 var LockContent bool
+var NoSync = false
 var CLISuccess chan bool
 var UserPerms bool
 var AdminPerms bool
