@@ -48,10 +48,18 @@ Empties the clipboard.`,
 	"exit":       `Shuts down the server.`,
 	"connect":    `Connects you to the server.`,
 	"disconnect": `Disconnects you from the server.`,
-	"rcon":       `rcon [command]:
+	"rcon": `rcon [command]:
 Issues remote console command to server.
 
 ex. 
 rcon config buffer 256
 sets the server buffer size to 256 bytes.`,
+	"security": `security tls:
+	displays TLS configuration
+
+	security tls toggle:
+		Toggles TLS on/off
+	
+	security tls toggleVerify:
+		Toggles TLS verification on/off. Use only for testing.`,
 }
